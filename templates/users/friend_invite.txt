@@ -1,0 +1,9 @@
+Hi {{ name }},
+
+{{ sender }} invited you to join InviteMe,
+  a website that brings people together!
+
+To accept the invitation, please click the link below:
+{{ link }}
+
+-- InviteMe Team

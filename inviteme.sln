@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "inviteme", "inviteme.njsproj", "{76DC14E7-69E5-4C61-B8F1-E73E6B490763}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{76DC14E7-69E5-4C61-B8F1-E73E6B490763}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76DC14E7-69E5-4C61-B8F1-E73E6B490763}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76DC14E7-69E5-4C61-B8F1-E73E6B490763}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76DC14E7-69E5-4C61-B8F1-E73E6B490763}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3835216C-EE98-42CC-817A-46380CABC8BC}
+	EndGlobalSection
+EndGlobal
