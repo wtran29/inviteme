@@ -11,7 +11,7 @@ from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
 from events.utils import event_code_generator
-from users.models import User
+from users.models import User, Friend
 
 
 PRIVATE = 'private'
@@ -24,6 +24,8 @@ TYPE_CHOICES = (
 
 class Event(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='event_creator', null=True)
+    friends = models.ForeignKey(Friend, on_delete=models.CASCADE, related_name='creator_friends', null=True)
+    invited_to = models.ManyToManyField(User, through='Invite', through_fields=('events', 'users'), related_name='invited_to', null=True)
     name = models.CharField(db_index=True, max_length=150)
     event_type = models.CharField(max_length=50, choices=TYPE_CHOICES)
     date = models.DateField(db_index=True, editable=True)
@@ -61,6 +63,15 @@ class Location(models.Model):
     pin = models.PointField()
 
 
+class Invite(models.Model):
+    events = models.ForeignKey(Event, on_delete=models.CASCADE, null=True)
+    users = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    is_invited = models.BooleanField(default=False)
+
+    def __str__(self):
+        return '%s is invited to %s' % (self.users, self.events)
+
+
 class EventInvite(models.Model):
     events = models.ForeignKey(Event, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
@@ -84,6 +95,16 @@ class EventInvite(models.Model):
         })
         message = template.render(context)
         send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [self.email])
+        """ TODO - after email is sent, if user email exists set is_invite to true"""
+        if self.email in User.objects.filter(email=self.email):
+            new_invite = Invite(
+                events=self.events,
+                users=User.objects.filter(email=self.email).pk,
+                is_invited=True,
+            )
+            new_invite.save()
+        else:
+            pass
 
 
 def pre_save_create_event_code(sender, instance, *args, **kwargs):

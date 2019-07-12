@@ -13,6 +13,7 @@ from rest_framework.authtoken.models import Token
 
 
 class User(AbstractUser):
+    # token = models.CharField(Token, max_length=250)
     username = models.CharField(_('Username'), max_length=150, unique=True)
     first_name = models.CharField(_('First Name'), max_length=150, blank=True)
     last_name = models.CharField(_('Last Name'), max_length=150, blank=True)
@@ -61,6 +62,7 @@ class FriendRequest(models.Model):
 class Friend(models.Model):
     main_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='main_friend')
     friends_with = models.ForeignKey(User, on_delete=models.CASCADE, related_name='connecting_friend')
+    status = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
