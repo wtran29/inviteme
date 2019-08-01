@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import BaseRouter from './routes';
 import 'antd/dist/antd.css';
 
-
 import { connect } from 'react-redux';
 import CustomLayout from './containers/Layout';
 import EventList from './containers/EventListView';

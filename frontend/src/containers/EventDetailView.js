@@ -4,28 +4,18 @@ import map from 'lodash';
 
 import { Card } from 'antd';
 
+import CommentList from '../containers/CommentListView';
+
 const Event = (props) => {
     console.log(props.data);
     const event = props.data
-    const getCreator = map(event.creator).value()
-    console.log(getCreator)
-    function test(getCreator) {
-        if (getCreator != null || getCreator !== undefined) {
-            return 'True';
-        }
-        else {
-            return 'False';
-        }
-    }
-    console.log(test(getCreator))
+    
     return (
 
         <div className="content">
-            <p className="name">
-                <h1>{event.name}</h1>
-            </p>
-         
-            <p>created by {event.username}</p>
+            <h2 className="name">{event.name}</h2>
+            <span className="creator">created by {event.creator && event.creator.first_name} {event.creator && event.creator.last_name}</span>
+            <p>Event is happening on {event.date}.</p>
         </div>
     )
 }
@@ -49,8 +39,11 @@ class EventDetail extends React.Component {
 
     render() {
         return (
-            
-            <Event data={this.state.event} />
+            <div className="ui container">
+                <Event data={this.state.event} />
+                <br />
+                <CommentList />
+            </div>
             
         )
     }
